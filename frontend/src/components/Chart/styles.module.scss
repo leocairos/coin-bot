@@ -1,0 +1,43 @@
+.buttonContainer {
+  display: flex;
+
+  button {
+    height: 2rem;
+    width: 8rem;
+    border-radius: 2rem;
+    background: var(--gray-900);
+    border:0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--white);
+
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
+}
+
+.chartsContainer {
+  display: block;
+}
+
+.cardsContainer {
+  height: 5rem;
+  background: var(--gray-300);
+  display: flex;
+  margin: 2px;
+}
+
+.card {
+  height: 3rem;
+  background: var(--gray-100);
+  width: 33%;
+  max-width: 150px;
+  margin: 10px;
+
+}

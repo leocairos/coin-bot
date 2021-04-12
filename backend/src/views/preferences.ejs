@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>RDLSC BTC-Bot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  -->
+</head>
+
+<body>
+  <div class="container">
+    <h3 class="header">RDLSC BTC-Bot</h3>
+    <p>
+      <i>
+        <%= pref.message %>
+      </i>
+    </p>
+
+    <strong>Ticker</strong>
+    <span class="badge badge-pill badge-light">
+      <%= pref.ticker.tickerDate %>
+    </span>
+
+
+    <h6>
+      <span class="badge badge-danger col-md-3 p-2 m-1">
+        <i class="material-icons">arrow_downward</i>
+        <%= new Intl.NumberFormat('pt-BR', { style: 'currency' , currency: 'BRL' }).format(pref.ticker.low) %>
+      </span>
+
+      <span class="badge badge-success col-md-3 p-2 m-1">
+        <i class="material-icons">arrow_upward</i>
+        <%= new Intl.NumberFormat('pt-BR', { style: 'currency' , currency: 'BRL' }).format(pref.ticker.high) %>
+      </span>
+
+      <span class="badge badge-secondary col-md-4 p-2 m-1">
+        <i class="material-icons">watch_later</i>
+        <%= new Intl.NumberFormat('pt-BR', { style: 'currency' , currency: 'BRL' }).format(pref.ticker.last) %>
+      </span>
+
+    </h6>
+
+    <hr>
+
+    <div class="form-row">
+      <div class="col-sm-5">
+        <strong> Change: </strong>
+
+        <span
+          class="<%=(pref.variation>= 0 && pref.variationValue >= 0) ? 'badge badge-success' : 'badge badge-danger'%>">
+          <%= pref.variation %> %
+        </span>
+        <span
+          class="<%=(pref.variation>= 0 && pref.variationValue >= 0) ? 'badge badge-success' : 'badge badge-danger'%>">
+          <%= new Intl.NumberFormat('pt-BR', { style: 'currency' , currency: 'BRL' }).format(pref.variationValue) %>
+        </span>
+      </div>
+
+      <label for="BTCBase" class="col-form-label">BTC Base</label>
+      <div class="form-group col-sm-5">
+        <input type="text" class="form-control" id="BTCBase" value=<%=new Intl.NumberFormat('pt-BR', { style: 'currency'
+          , currency: 'BRL' }).format(pref.BTCBase) %>>
+      </div>
+
+    </div>
+
+    <form method="POST" action="preferences">
+      <div class="form-row">
+
+        <label for="downLimiteAlert" class="col-form-label">Down Limite Alert(%)</label>
+        <div class="form-group col-sm-2">
+          <input type="number" class="form-control" id="downLimiteAlert" min="1" max="99" value=<%=pref.downLimiteAlert
+            %>>
+          <%= new Intl.NumberFormat('pt-BR', { style: 'currency' , currency: 'BRL' }).format(pref.downLimiteValue) %>
+        </div>
+
+        <label for="topLimiteAlert" class="col-form-label">Top Limite Alert (%)</label>
+        <div class="form-group col-sm-2">
+          <input type="number" class="form-control" id="topLimiteAlert" min="1" max="99" value=<%=pref.topLimiteAlert
+            %>>
+          <%= new Intl.NumberFormat('pt-BR', { style: 'currency' , currency: 'BRL' }).format(pref.topLimiteValue) %>
+        </div>
+
+      </div>
+      <hr>
+      <div class="form-row">
+        <label for="mailRecipient" class="col-form-label">Mail Recipient</label>
+        <div class="form-group col-md-4">
+          <input type="text" class="form-control" id="mailRecipient" value=<%=pref.mailRecipient %>>
+        </div>
+
+        <label for="checkInterval" class="col-form-label">Check Interval (in seconds)</label>
+        <div class="form-group col-md-2">
+          <input type="number" class="form-control" name="checkInterval" id="checkInterval" min="1" max="59"
+            value=<%=pref.checkInterval %>>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label for="password" class="col-form-label">Password</label>
+        <div class="form-group col-md-4">
+          <input type="password" class="form-control" id="password">
+        </div>
+
+      </div>
+
+      <hr>
+      <div class="form-row">
+        <button type="button" class="btn btn-primary col-md-4 m-2">
+          <i class="material-icons">edit</i>
+          Update
+        </button>
+
+      </div>
+    </form>
+
+  </div>
+</body>
+
+</html>
